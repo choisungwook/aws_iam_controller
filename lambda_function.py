@@ -14,7 +14,7 @@ import boto3
 def create_user(parameter):
     username = parameter['username']
 
-    iam_client = boto3.resource('iam')
+    iam_client = boto3.client('iam')
     iam_client.create_user(UserName=username)
 
     return "done"
@@ -26,7 +26,7 @@ def create_user_with_policy(parameter):
     username = parameter['username']
     policy = parameter['policy']
 
-    iam_client = boto3.resource('iam')
+    iam_client = boto3.client('iam')
     iam_client.create_user(
         UserName=username,
         PolicyArn='policy:arn'
@@ -40,7 +40,7 @@ def create_user_with_policy(parameter):
 def delete_user(parameter):
     username = parameter['username']
 
-    iam_client = boto3.resource('iam')
+    iam_client = boto3.client('iam')
     iam_client.delete_user(UserName=username)
 
     return "done"
