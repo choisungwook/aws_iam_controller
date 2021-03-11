@@ -17,6 +17,8 @@ def create_user(parameter):
     iam_client = boto3.resource('iam')
     iam_client.create_user(UserName=username)
 
+    return "done"
+
 """
     IAM 계정 생성과 정책 설정
 """
@@ -41,6 +43,8 @@ def delete_user(parameter):
     iam_client = boto3.resource('iam')
     iam_client.delete_user(UserName=username)
 
+    return "done"
+
 """
     IAM 유저 목록
 """
@@ -48,9 +52,11 @@ def list_user(parameter=None):
     client=boto3.client('iam')
     response=client.list_users()
 
-    for x in response['Users']:
-        print(x['UserName'])
-
+    user_lists = []    
+    for user_info in response['Users']:
+        user_lists.append(user_info['UserName'])
+    
+    return user_lists
 
 """
     main function
@@ -61,13 +67,13 @@ def lambda_handler(event, context):
     request_parameter = event['queryStringParameters']
     function_name = request_parameter['command']
     
-    globals()[function_name](event['queryStringParameters'])
+    response = globals()[function_name](event['queryStringParameters'])
     
     # (todo) 회원가입 실패하면 에러 응답 전달
     statusCode = 200
 
     response_body = {
-        "hello": "world"
+        "reponse": response
     }
 
     return {
