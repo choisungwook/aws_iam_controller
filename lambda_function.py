@@ -44,7 +44,7 @@ def delete_user(parameter):
 """
     IAM 유저 목록
 """
-def list_user():
+def list_user(parameter=None):
     client=boto3.client('iam')
     response=client.list_users()
 
