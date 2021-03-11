@@ -13,11 +13,12 @@ import boto3
 """
 def create_user(parameter):
     username = parameter['username']
-
     iam_client = boto3.client('iam')
-    iam_client.create_user(UserName=username)
 
-    return "done"
+    user = iam_client.create_user(UserName=username)
+    set_password(username)
+
+    return user
 
 """
     IAM 계정 생성과 정책 설정
@@ -57,6 +58,24 @@ def list_user(parameter=None):
         user_lists.append(user_info['UserName'])
     
     return user_lists
+
+
+"""
+    계정 패스워드 등록
+"""
+def set_password(parameter):
+    client=boto3.client('iam')
+
+    usernmae = parameter['username']
+    new_password = "Xf#Vfjck4T"
+
+    response = client.create_login_profile(
+        UserName=usernmae,
+        Password=new_password,
+        PasswordResetRequired=True
+    )
+
+    return response
 
 """
     main function
