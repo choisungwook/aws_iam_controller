@@ -16,7 +16,13 @@ def create_user(parameter):
     iam_client = boto3.client('iam')
 
     user = iam_client.create_user(UserName=username)
-    set_password(username)
+    temporary_password = "Xf#Vfjck4T"
+
+    iam_client.create_login_profile(
+        UserName=username,
+        Password=temporary_password,
+        PasswordResetRequired=True
+    )
 
     return user
 
@@ -104,3 +110,5 @@ def lambda_handler(event, context):
         },
         'body': json.dumps(response_body, ensure_ascii=False)
     }
+
+create_user('tttt223')
