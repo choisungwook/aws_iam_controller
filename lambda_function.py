@@ -4,7 +4,7 @@ import boto3
 
 
 """
-    계정만 생성
+    IAM 계정만 생성
 
     (todo) 예외처리 필요
     1. 중복
@@ -16,7 +16,7 @@ def create_user(username):
     iam_client.create_user(UserName=username)
 
 """
-    계정 생성과 정책 설정
+    IAM 계정 생성과 정책 설정
 """
 def create_user_with_policy(username, policy):
     iam_client = boto3.resource('iam')
