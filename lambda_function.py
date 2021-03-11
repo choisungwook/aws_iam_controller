@@ -4,6 +4,8 @@ import boto3
 
 
 """
+    계정만 생성
+
     (todo) 예외처리 필요
     1. 중복
     2. 권한(IAM) 에러
@@ -12,6 +14,17 @@ import boto3
 def create_user(username):
     iam_client = boto3.resource('iam')
     iam_client.create_user(UserName=username)
+
+"""
+    계정 생성과 정책 설정
+"""
+def create_user_with_policy(username, policy):
+    iam_client = boto3.resource('iam')
+    iam_client.create_user(
+        UserName=username,
+        PolicyArn='policy:arn'
+    )
+    pass
 
 """
     main function
