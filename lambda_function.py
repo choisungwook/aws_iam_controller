@@ -27,6 +27,16 @@ def create_user_with_policy(username, policy):
     pass
 
 """
+    IAM 유저 목록
+"""
+def list_user():
+    client=boto3.client('iam')
+    response=client.list_users()
+
+    for x in response['Users']:
+        print(x['UserName'])
+
+"""
     main function
 """
 def lambda_handler(event, context):
