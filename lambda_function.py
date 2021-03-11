@@ -72,12 +72,12 @@ def list_user(parameter=None):
 def set_password(parameter):
     client=boto3.client('iam')
 
-    usernmae = parameter['username']
-    new_password = "Xf#Vfjck4T"
+    username = parameter['username']
+    temporary_password = "Xf#Vfjck4T"
 
     response = client.create_login_profile(
-        UserName=usernmae,
-        Password=new_password,
+        UserName=username,
+        Password=temporary_password,
         PasswordResetRequired=True
     )
 
