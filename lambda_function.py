@@ -11,7 +11,7 @@ import boto3
 """
 def create_user(username):
     iam_client = boto3.resource('iam')
-    user = iam_client.create_user(username)
+    iam_client.create_user(UserName=username)
 
 """
     main function
