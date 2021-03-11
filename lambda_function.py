@@ -1,5 +1,5 @@
 import json
-import botot3
+import boto3
 
 """
     main function
