@@ -24,7 +24,7 @@ def create_user(parameter):
         PasswordResetRequired=True
     )
 
-    return user
+    return "done"
 
 """
     IAM 계정 생성과 정책 설정
