@@ -24,6 +24,10 @@ def create_user(parameter):
         PasswordResetRequired=True
     )
 
+    # 비밀번호 변경 권한 부여
+    IAMUserChangePassword = """arn:aws:iam::aws:policy/IAMUserChangePassword"""
+    user.attach_policy(PolicyArn=IAMUserChangePassword)
+
     return "done"
 
 """
