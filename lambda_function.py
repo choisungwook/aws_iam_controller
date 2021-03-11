@@ -5,7 +5,7 @@ import boto3
     main function
 """
 def lambda_handler(event, context):
-    username_parameter = event['username']
+    username_parameter = event['queryStringParameters']['username']
 
     statusCode = 200
     response_body = {
