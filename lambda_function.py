@@ -110,5 +110,3 @@ def lambda_handler(event, context):
         },
         'body': json.dumps(response_body, ensure_ascii=False)
     }
-
-create_user('tttt223')
