@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: create-user
+Resources:
+  ApiGatewayApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Cors:
+        AllowMethods: "'GET'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+        MaxAge: "'600'"
+  MainFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.7
+      CodeUri: ./
+      FunctionName: create-user
+      Environment:
+        Variables:
+          TZ: Asia/Seoul
+      Timeout: 60
+      Role: arn:aws:iam::467606240901:role/admin
+      Events:
+        MyApi:
+          Type: Api
+          Properties:
+            RequestParameters:
+              - method.request.querystring.command:
+                  Required: true
+            Path: /createuser
+            Method: GET
+            RestApiId:
+              Ref: ApiGatewayApi
