@@ -13,9 +13,15 @@ import boto3
 """
 def create_user(parameter):
     username = parameter['username']
+    # 비밀번호 변경 권한
+    IAMUserChangePassword = """arn:aws:iam::aws:policy/IAMUserChangePassword"""
+
     iam_client = boto3.client('iam')
 
-    user = iam_client.create_user(UserName=username)
+    user = iam_client.create_user(
+        UserName=username,
+        PermissionsBoundary=IAMUserChangePassword
+    )
     temporary_password = "Xf#Vfjck4T"
 
     iam_client.create_login_profile(
@@ -23,10 +29,6 @@ def create_user(parameter):
         Password=temporary_password,
         PasswordResetRequired=True
     )
-
-    # 비밀번호 변경 권한 부여
-    IAMUserChangePassword = """arn:aws:iam::aws:policy/IAMUserChangePassword"""
-    user.attach_policy(PolicyArn=IAMUserChangePassword)
 
     return "done"
 
