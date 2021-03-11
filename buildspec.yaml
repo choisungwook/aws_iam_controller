@@ -3,9 +3,9 @@ version: 0.2
 phases:
   build:
     commands:
-      - aws cloudformation package --s3-bucket awscontroller --template-file template.yaml --output-template-file restapi-output-template.yaml
+      - aws cloudformation package --s3-bucket awscontroller --template-file template.yaml --output-template-file iam-createuser-template.yaml
 
 artifacts:
   type: zip
   files:
-    - restapi-output-template.yaml
+    - iam-createuser-template.yaml
