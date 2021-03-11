@@ -11,14 +11,19 @@ import boto3
     2. 권한(IAM) 에러
     3. 등등
 """
-def create_user(username):
+def create_user(parameter):
+    username = parameter['username']
+
     iam_client = boto3.resource('iam')
     iam_client.create_user(UserName=username)
 
 """
     IAM 계정 생성과 정책 설정
 """
-def create_user_with_policy(username, policy):
+def create_user_with_policy(parameter):
+    username = parameter['username']
+    policy = parameter['policy']
+
     iam_client = boto3.resource('iam')
     iam_client.create_user(
         UserName=username,
@@ -30,7 +35,9 @@ def create_user_with_policy(username, policy):
     IAM 계정 삭제
     (todo) 예외처리 
 """
-def delete_user(username):
+def delete_user(parameter):
+    username = parameter['username']
+
     iam_client = boto3.resource('iam')
     iam_client.delete_user(UserName=username)
 
