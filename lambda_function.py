@@ -19,8 +19,7 @@ def create_user(parameter):
     iam_client = boto3.client('iam')
 
     user = iam_client.create_user(
-        UserName=username,
-        PermissionsBoundary=IAMUserChangePassword
+        UserName=username
     )
     temporary_password = "Xf#Vfjck4T"
 
