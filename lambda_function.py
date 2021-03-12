@@ -18,11 +18,18 @@ def create_user(parameter):
 
     iam_client = boto3.client('iam')
 
-    user = iam_client.create_user(
-        UserName=username
+    # IAM user 생성
+    iam_client.create_user(UserName=username)
+
+    # 비밀번호 변경 policy 설정
+    iam_client.attach_user_policy(
+        UserName=username,
+        PolicyArn=IAMUserChangePassword
     )
+
     temporary_password = "Xf#Vfjck4T"
 
+    # IAM console 로그인 설정
     iam_client.create_login_profile(
         UserName=username,
         Password=temporary_password,
